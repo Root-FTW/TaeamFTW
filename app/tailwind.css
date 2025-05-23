@@ -1,12 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-html,
-body {
-  @apply bg-white dark:bg-gray-950;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
 
-  @media (prefers-color-scheme: dark) {
-    color-scheme: dark;
+  body {
+    @apply bg-gaming-dark text-white font-display;
+    overflow-x: hidden;
+  }
+
+  * {
+    @apply border-gray-800;
   }
 }
+
+@layer components {
+  .btn-primary {
+    @apply bg-gradient-gaming text-white font-bold py-3 px-6 rounded-lg
+           transform transition-all duration-300 hover:scale-105 hover:shadow-lg
+           hover:shadow-fortnite-blue/50 active:scale-95;
+  }
+
+  .btn-secondary {
+    @apply border-2 border-fortnite-blue text-fortnite-blue font-bold py-3 px-6 rounded-lg
+           transform transition-all duration-300 hover:bg-fortnite-blue hover:text-white
+           hover:scale-105 active:scale-95;
+  }
+
+  .card-gaming {
+    @apply bg-gaming-gray/80 backdrop-blur-sm border border-gray-700 rounded-xl p-6
+           transform transition-all duration-300 hover:scale-105 hover:border-fortnite-blue/50
+           hover:shadow-lg hover:shadow-fortnite-blue/20;
+  }
+
+  .text-gradient {
+    @apply bg-gradient-gaming bg-clip-text text-transparent;
+  }
+
+  .text-neon {
+    @apply text-neon-cyan;
+    text-shadow: 0 0 10px currentColor, 0 0 20px currentColor;
+  }
+
+  .text-secondary {
+    @apply text-gray-200;
+  }
+
+  .text-muted {
+    @apply text-gray-300;
+  }
+
+  .glow-effect {
+    @apply shadow-lg shadow-fortnite-blue/30;
+    filter: drop-shadow(0 0 10px rgba(0, 120, 242, 0.5));
+  }
+}
+
+

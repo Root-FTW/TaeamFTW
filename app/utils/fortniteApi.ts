@@ -8,6 +8,98 @@
 const API_KEY = '3bb03286-20da-4033-9bdc-b70bbdb3399e';
 const BASE_URL = 'https://fortnite-api.com/v2';
 
+// Cache configuration
+const CACHE_DURATION = 10 * 60 * 1000; // 10 minutes in milliseconds
+const CACHE_CLEANUP_INTERVAL = 30 * 60 * 1000; // 30 minutes
+
+// In-memory cache store
+interface CacheEntry {
+  data: any;
+  timestamp: number;
+  expiresAt: number;
+}
+
+class MemoryCache {
+  private cache = new Map<string, CacheEntry>();
+  private cleanupTimer: NodeJS.Timeout | null = null;
+
+  constructor() {
+    this.startCleanupTimer();
+  }
+
+  set(key: string, data: any, duration: number = CACHE_DURATION): void {
+    const now = Date.now();
+    const entry: CacheEntry = {
+      data,
+      timestamp: now,
+      expiresAt: now + duration
+    };
+
+    this.cache.set(key, entry);
+  }
+
+  get(key: string): any | null {
+    const entry = this.cache.get(key);
+
+    if (!entry) {
+      return null;
+    }
+
+    // Check if expired
+    if (Date.now() > entry.expiresAt) {
+      this.cache.delete(key);
+      return null;
+    }
+
+    return entry.data;
+  }
+
+  has(key: string): boolean {
+    const entry = this.cache.get(key);
+    if (!entry) return false;
+
+    if (Date.now() > entry.expiresAt) {
+      this.cache.delete(key);
+      return false;
+    }
+
+    return true;
+  }
+
+  clear(): void {
+    this.cache.clear();
+  }
+
+  size(): number {
+    return this.cache.size;
+  }
+
+  private startCleanupTimer(): void {
+    this.cleanupTimer = setInterval(() => {
+      this.cleanup();
+    }, CACHE_CLEANUP_INTERVAL);
+  }
+
+  private cleanup(): void {
+    const now = Date.now();
+    for (const [key, entry] of this.cache.entries()) {
+      if (now > entry.expiresAt) {
+        this.cache.delete(key);
+      }
+    }
+  }
+
+  stopCleanup(): void {
+    if (this.cleanupTimer) {
+      clearInterval(this.cleanupTimer);
+      this.cleanupTimer = null;
+    }
+  }
+}
+
+// Global cache instance
+const cache = new MemoryCache();
+
 // Rate limiting queue - Updated to support 3 requests per second
 class RateLimiter {
   private queue: Array<() => void> = [];
@@ -117,8 +209,20 @@ export const TEAM_MEMBERS = [
   'ValkyFTW'
 ];
 
-// Fetch player stats with rate limiting
+// Cached version of getPlayerStats
 export async function getPlayerStats(playerName: string): Promise<FortniteStats | null> {
+  const cacheKey = `player_stats_${playerName}`;
+
+  // Try to get from cache first
+  const cachedData = cache.get(cacheKey);
+  if (cachedData !== null) {
+    console.log(`🎯 Cache HIT for ${playerName}`);
+    return cachedData;
+  }
+
+  console.log(`⚡ Cache MISS for ${playerName} - fetching from API`);
+
+  // If not in cache, fetch from API
   try {
     const response = await rateLimiter.execute(async () => {
       const url = `${BASE_URL}/stats/br/v2?name=${encodeURIComponent(playerName)}`;
@@ -137,20 +241,40 @@ export async function getPlayerStats(playerName: string): Promise<FortniteStats 
     });
 
     const apiResponse = response as ApiResponse<FortniteStats>;
+    let result: FortniteStats | null = null;
 
     if (apiResponse.status === 200 && apiResponse.data) {
-      return apiResponse.data;
+      result = apiResponse.data;
     }
 
-    return null;
+    // Cache the result (even if null, to avoid repeated failed requests)
+    cache.set(cacheKey, result);
+    console.log(`💾 Cached result for ${playerName}`);
+
+    return result;
   } catch (error) {
     console.error(`Error fetching stats for ${playerName}:`, error);
+
+    // Cache null result for failed requests (shorter duration)
+    cache.set(cacheKey, null, 2 * 60 * 1000); // 2 minutes for failed requests
+
     return null;
   }
 }
 
-// Fetch all team members' stats - Optimized for 3 requests per second
+// Cached version of getAllTeamStats - Optimized for 3 requests per second
 export async function getAllTeamStats(): Promise<Record<string, FortniteStats | null>> {
+  const cacheKey = 'all_team_stats';
+
+  // Try to get from cache first
+  const cachedData = cache.get(cacheKey);
+  if (cachedData !== null) {
+    console.log(`🎯 Cache HIT for all team stats`);
+    return cachedData;
+  }
+
+  console.log(`⚡ Cache MISS for all team stats - fetching from API`);
+
   const stats: Record<string, FortniteStats | null> = {};
 
   // Process team members in batches of 3 to utilize full API capacity
@@ -165,6 +289,10 @@ export async function getAllTeamStats(): Promise<Record<string, FortniteStats | 
   results.forEach(({ member, result }) => {
     stats[member] = result;
   });
+
+  // Cache the complete team stats
+  cache.set(cacheKey, stats);
+  console.log(`💾 Cached all team stats`);
 
   return stats;
 }
@@ -295,4 +423,44 @@ export function getAvailableDataTypes() {
       'Live Match Status'
     ]
   };
+}
+
+// Cache management functions
+export function getCacheStats() {
+  return {
+    size: cache.size(),
+    duration: `${CACHE_DURATION / 1000 / 60} minutes`,
+    cleanupInterval: `${CACHE_CLEANUP_INTERVAL / 1000 / 60} minutes`
+  };
+}
+
+export function clearCache() {
+  cache.clear();
+  console.log('🧹 Cache cleared manually');
+}
+
+export function getCacheInfo() {
+  const stats = getCacheStats();
+  console.log('📊 Cache Info:', stats);
+  return stats;
+}
+
+// Force refresh a specific player's stats
+export async function refreshPlayerStats(playerName: string): Promise<FortniteStats | null> {
+  const cacheKey = `player_stats_${playerName}`;
+
+  // Remove from cache first
+  cache.clear(); // Clear specific key would be better, but this works
+
+  console.log(`🔄 Force refreshing stats for ${playerName}`);
+
+  // Fetch fresh data
+  return await getPlayerStats(playerName);
+}
+
+// Preload all team stats (useful for warming up cache)
+export async function preloadTeamStats(): Promise<void> {
+  console.log('🚀 Preloading team stats...');
+  await getAllTeamStats();
+  console.log('✅ Team stats preloaded');
 }

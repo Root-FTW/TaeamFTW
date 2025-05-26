@@ -6,14 +6,14 @@ import StatsBoard from "~/components/StatsBoard";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "FTW - Fortnite E-Sports Team | Dominating the Leaderboards" },
+    { title: "FTW Anti-Grinders Team | Elite Fortnite E-Sports Squad" },
     {
       name: "description",
-      content: "FTW is an elite Fortnite e-sports team focused on climbing the wins leaderboards with cutting-edge strategy and unmatched competitive spirit."
+      content: "FTW Anti-Grinders Team - We don't grind, we dominate. Elite Fortnite competitive gaming squad with strategic gameplay and unmatched skill."
     },
-    { name: "keywords", content: "Fortnite, e-sports, gaming, competitive, FTW, team, leaderboards, wins" },
-    { property: "og:title", content: "FTW - Fortnite E-Sports Team" },
-    { property: "og:description", content: "Elite Fortnite e-sports team dominating the competitive scene" },
+    { name: "keywords", content: "Fortnite, e-sports, gaming, competitive, FTW, anti-grinders, team, elite, dominate" },
+    { property: "og:title", content: "FTW Anti-Grinders Team" },
+    { property: "og:description", content: "Elite Fortnite e-sports team - We don't grind, we dominate the competitive scene" },
     { property: "og:type", content: "website" },
   ];
 };
@@ -40,18 +40,22 @@ export default function Index() {
         <section id="about" className="py-20 px-4 relative">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-4xl md:text-5xl font-gaming font-bold mb-8">
-              <span className="text-gradient">ABOUT FTW</span>
+              <span className="text-gradient">ABOUT FTW ANTI-GRINDERS</span>
             </h2>
             <p className="text-xl text-gray-300 leading-relaxed mb-8">
-              FTW is more than just a team—we're a brotherhood united by our passion for
-              <span className="text-fortnite-blue font-bold"> competitive excellence</span>.
-              Our focus on climbing the wins leaderboards drives every strategy, every play,
-              and every victory we achieve together.
+              We are <span className="text-fortnite-blue font-bold">FTW Anti-Grinders Team</span> -
+              the paradox that dominates Fortnite. While others grind endlessly,
+              <span className="text-cyan-400 font-bold"> we achieve more with pure skill and strategy</span>.
+              We don't need to grind because we're already at the top.
+            </p>
+            <p className="text-lg text-gray-400 leading-relaxed mb-6">
+              Our philosophy is simple: <span className="text-fortnite-purple font-semibold">Quality over quantity</span>.
+              Every match is calculated, every move is precise, every victory is earned through
+              superior gameplay—not mindless repetition.
             </p>
             <p className="text-lg text-gray-400 leading-relaxed">
-              With cutting-edge tactics, relentless practice, and an unbreakable team spirit,
-              we've transformed from individual players into a force that dominates the
-              Fortnite competitive scene.
+              We are the <span className="text-gradient font-bold">anti-grinders who out-grind the grinders</span>.
+              That's the FTW difference.
             </p>
           </div>
         </section>
@@ -68,8 +72,8 @@ export default function Index() {
                   <span className="text-2xl font-gaming font-bold text-gradient">FTW</span>
                 </div>
                 <p className="text-gray-400">
-                  Elite Fortnite e-sports team dominating the competitive scene with
-                  unmatched skill and strategy.
+                  FTW Anti-Grinders Team - We don't grind, we dominate. Elite Fortnite
+                  e-sports squad with unmatched skill and strategy.
                 </p>
               </div>
 
@@ -85,7 +89,7 @@ export default function Index() {
               <div>
                 <h3 className="text-lg font-bold text-white mb-4">Connect</h3>
                 <p className="text-gray-400 mb-4">
-                  Follow our journey to the top of the leaderboards
+                  Follow our anti-grind philosophy to elite domination
                 </p>
                 <div className="flex space-x-4">
                   <button className="w-10 h-10 bg-gray-700 hover:bg-fortnite-blue rounded-lg flex items-center justify-center transition-colors">
@@ -103,7 +107,7 @@ export default function Index() {
 
             <div className="border-t border-gray-700 mt-8 pt-8 text-center">
               <p className="text-gray-500">
-                © 2024 FTW E-Sports Team. All rights reserved. | Powered by competitive excellence.
+                © 2024 FTW Anti-Grinders Team. All rights reserved. | Powered by elite domination, not grinding.
               </p>
             </div>
           </div>

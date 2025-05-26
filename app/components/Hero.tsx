@@ -57,8 +57,7 @@ export default function Hero() {
             <span className="text-gradient">FTW</span>
           </h1>
           <div className="text-2xl md:text-4xl lg:text-5xl font-display font-bold mb-4">
-            <span className="text-white">FORTNITE </span>
-            <span className="text-neon-cyan">E-SPORTS</span>
+            <span className="text-neon-cyan">ANTI-GRINDERS</span>
             <span className="text-white"> TEAM</span>
           </div>
         </motion.div>
@@ -70,8 +69,9 @@ export default function Hero() {
           className="mb-12"
         >
           <p className="text-lg md:text-xl lg:text-2xl text-gray-200 max-w-3xl mx-auto leading-relaxed">
-            Dominating the <span className="text-fortnite-blue font-bold">wins leaderboards</span> with
-            cutting-edge strategy, unmatched skill, and relentless competitive spirit.
+            <span className="text-fortnite-purple font-bold">We don't grind, we dominate.</span> Elite Fortnite squad
+            achieving more with <span className="text-neon-cyan font-bold">pure skill and strategy</span> than others
+            do with endless grinding.
           </p>
         </motion.div>
 

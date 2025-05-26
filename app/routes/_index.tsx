@@ -40,7 +40,7 @@ export default function Index() {
         <section id="about" className="py-20 px-4 relative">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-4xl md:text-5xl font-gaming font-bold mb-8">
-              <span className="text-gradient">ABOUT FTW ANTI-GRINDERS GRINDERS</span>
+              <span className="text-gradient">ABOUT FTW ANTI-GRINDERS GRINDERS TEAM</span>
             </h2>
             <p className="text-xl text-gray-300 leading-relaxed mb-8">
               We are <span className="text-fortnite-blue font-bold">FTW Anti-Grinders Grinders Team</span> -

@@ -187,7 +187,14 @@ export default function TeamMembers() {
           isLoading: false,
         }));
 
-        setTeamMembers(updatedMembers);
+        // Sort members by wins (highest first) - Shows team ranking by performance
+        const sortedMembers = updatedMembers.sort((a, b) => {
+          const aWins = a.stats?.stats?.all?.overall?.wins || 0;
+          const bWins = b.stats?.stats?.all?.overall?.wins || 0;
+          return bWins - aWins; // Descending order (highest wins first)
+        });
+
+        setTeamMembers(sortedMembers);
       } catch (error) {
         console.error('Failed to load team stats:', error);
 
@@ -198,6 +205,7 @@ export default function TeamMembers() {
           isLoading: false,
         }));
 
+        // Keep original order when stats fail to load
         setTeamMembers(updatedMembers);
       }
     };

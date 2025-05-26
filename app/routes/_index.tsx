@@ -6,13 +6,13 @@ import StatsBoard from "~/components/StatsBoard";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "FTW Anti-Grinders Team | Elite Fortnite E-Sports Squad" },
+    { title: "FTW Anti-Grinders Grinders Team | Elite Fortnite E-Sports Squad" },
     {
       name: "description",
-      content: "FTW Anti-Grinders Team - We don't grind, we dominate. Elite Fortnite competitive gaming squad with strategic gameplay and unmatched skill."
+      content: "FTW Anti-Grinders Grinders Team - We don't grind, we dominate. Elite Fortnite competitive gaming squad with strategic gameplay and unmatched skill."
     },
-    { name: "keywords", content: "Fortnite, e-sports, gaming, competitive, FTW, anti-grinders, team, elite, dominate" },
-    { property: "og:title", content: "FTW Anti-Grinders Team" },
+    { name: "keywords", content: "Fortnite, e-sports, gaming, competitive, FTW, anti-grinders, grinders, team, elite, dominate" },
+    { property: "og:title", content: "FTW Anti-Grinders Grinders Team" },
     { property: "og:description", content: "Elite Fortnite e-sports team - We don't grind, we dominate the competitive scene" },
     { property: "og:type", content: "website" },
   ];
@@ -40,11 +40,11 @@ export default function Index() {
         <section id="about" className="py-20 px-4 relative">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-4xl md:text-5xl font-gaming font-bold mb-8">
-              <span className="text-gradient">ABOUT FTW ANTI-GRINDERS</span>
+              <span className="text-gradient">ABOUT FTW ANTI-GRINDERS GRINDERS</span>
             </h2>
             <p className="text-xl text-gray-300 leading-relaxed mb-8">
-              We are <span className="text-fortnite-blue font-bold">FTW Anti-Grinders Team</span> -
-              the paradox that dominates Fortnite. While others grind endlessly,
+              We are <span className="text-fortnite-blue font-bold">FTW Anti-Grinders Grinders Team</span> -
+              the ultimate paradox that dominates Fortnite. While others grind endlessly,
               <span className="text-cyan-400 font-bold"> we achieve more with pure skill and strategy</span>.
               We don't need to grind because we're already at the top.
             </p>
@@ -54,7 +54,7 @@ export default function Index() {
               superior gameplay—not mindless repetition.
             </p>
             <p className="text-lg text-gray-400 leading-relaxed">
-              We are the <span className="text-gradient font-bold">anti-grinders who out-grind the grinders</span>.
+              We are the <span className="text-gradient font-bold">anti-grinders grinders who out-grind the grinders</span>.
               That's the FTW difference.
             </p>
           </div>
@@ -72,7 +72,7 @@ export default function Index() {
                   <span className="text-2xl font-gaming font-bold text-gradient">FTW</span>
                 </div>
                 <p className="text-gray-400">
-                  FTW Anti-Grinders Team - We don't grind, we dominate. Elite Fortnite
+                  FTW Anti-Grinders Grinders Team - We don't grind, we dominate. Elite Fortnite
                   e-sports squad with unmatched skill and strategy.
                 </p>
               </div>
@@ -107,7 +107,7 @@ export default function Index() {
 
             <div className="border-t border-gray-700 mt-8 pt-8 text-center">
               <p className="text-gray-500">
-                © 2024 FTW Anti-Grinders Team. All rights reserved. | Powered by elite domination, not grinding.
+                © 2024 FTW Anti-Grinders Grinders Team. All rights reserved. | Powered by elite domination, not grinding.
               </p>
             </div>
           </div>

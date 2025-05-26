@@ -58,6 +58,7 @@ export default function Hero() {
           </h1>
           <div className="text-2xl md:text-4xl lg:text-5xl font-display font-bold mb-4">
             <span className="text-neon-cyan">ANTI-GRINDERS</span>
+            <span className="text-fortnite-purple"> GRINDERS</span>
             <span className="text-white"> TEAM</span>
           </div>
         </motion.div>
